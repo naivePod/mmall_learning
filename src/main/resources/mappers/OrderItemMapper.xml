@@ -160,7 +160,7 @@
       quantity = #{quantity,jdbcType=INTEGER},
       total_price = #{totalPrice,jdbcType=DECIMAL},
       create_time = #{createTime,jdbcType=TIMESTAMP},
-      now()
+      update_time = now()
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>
