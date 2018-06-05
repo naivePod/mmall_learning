@@ -47,6 +47,47 @@
     from mmall_product
     where id = #{id,jdbcType=INTEGER}
   </select>
+  <select id="selectProducts" resultMap="ResultMapWithBLOBs">
+    select
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List"/>
+    FROM mmall_product
+    ORDER by id ASC
+  </select>
+  <select id="selectProductByNameAndId" resultMap="ResultMapWithBLOBs" parameterType="map">
+    select
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List"/>
+    FROM mmall_product
+    <where>
+      <if test="productId != null">
+        AND id = #{productId}
+      </if>
+      <if test="productName != null">
+        AND name like #{productName}
+      </if>
+    </where>
+
+  </select>
+  <select id="selectProductsByKeywordAndCategoryIds" resultMap="ResultMapWithBLOBs" parameterType="map">
+    SELECT
+    <include refid="Base_Column_List"/>
+    ,
+    <include refid="Blob_Column_List"/>
+    FROM  mmall_product
+    where status = 1
+    <if test="keyword != null">
+      AND name like #{keyword}
+    </if>
+    <if test="categoryIds != null">
+      and category_id in
+      <foreach collection="categoryIds" open="(" separator="," close=")" item="item" index="index">
+        #{item}
+      </foreach>
+    </if>
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from mmall_product
     where id = #{id,jdbcType=INTEGER}
@@ -173,7 +214,7 @@
         create_time = #{createTime,jdbcType=TIMESTAMP},
       </if>
       <if test="updateTime != null">
-        update_time = #{updateTime,jdbcType=TIMESTAMP},
+        update_time = now()},
       </if>
       <if test="subImages != null">
         sub_images = #{subImages,jdbcType=LONGVARCHAR},

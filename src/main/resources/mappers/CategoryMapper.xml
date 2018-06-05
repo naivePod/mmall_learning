@@ -21,6 +21,20 @@
     from mmall_category
     where id = #{id,jdbcType=INTEGER}
   </select>
+    <select id="selectByParentId" resultType="com.mmall.pojo.Category" parameterType="integer">
+      select
+      <include refid="Base_Column_List" />
+      from mmall_category
+      WHERE parent_id = #{parentId}
+    </select>
+  <select id="checkCategoryName" resultType="java.lang.Integer" parameterType="string">
+      SELECT count(*) FROM mmall_category
+      where name = #{categoryName}
+  </select>
+  <select id="selectIdByParentId" resultType="java.lang.Integer">
+    select id from mmall_category
+    WHERE parent_id = #{parentId}
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from mmall_category
     where id = #{id,jdbcType=INTEGER}
@@ -101,7 +115,7 @@
         create_time = #{createTime,jdbcType=TIMESTAMP},
       </if>
       <if test="updateTime != null">
-        update_time = #{updateTime,jdbcType=TIMESTAMP},
+        update_time = now(),
       </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
