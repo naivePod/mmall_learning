@@ -1,5 +1,6 @@
 package com.mmall.service.impl;
 
+import com.google.common.collect.Lists;
 import com.mmall.common.Const;
 import com.mmall.common.ServerResponse;
 import com.mmall.common.TokenCache;
@@ -13,6 +14,8 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 
 @Service("iUserService")
@@ -184,7 +187,7 @@ public class UserServiceImpl implements IUserService {
         if(user != null && user.getRole().equals(Const.Role.ROLE_ADMIN)) {
             return ServerResponse.createBySuccess();
         }
-
+        Map map = new HashMap<>();
         return ServerResponse.createByErrorMsg("无权限，无法修改");
     }
 }

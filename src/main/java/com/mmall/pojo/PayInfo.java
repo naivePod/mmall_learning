@@ -97,4 +97,6 @@ public class PayInfo {
     public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
     }
+
+
 }

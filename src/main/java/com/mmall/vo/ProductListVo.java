@@ -75,4 +75,6 @@ public class ProductListVo {
     public void setImageHost(String imageHost) {
         this.imageHost = imageHost;
     }
+
+
 }
