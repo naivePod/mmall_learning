@@ -1,6 +1,12 @@
 package com.mmall.pojo;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.Setter;
+
 import java.util.Date;
+
+
 
 public class Cart {
     private Integer id;
@@ -30,7 +36,6 @@ public class Cart {
     public Cart() {
         super();
     }
-
     public Integer getId() {
         return id;
     }
@@ -86,4 +91,5 @@ public class Cart {
     public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
     }
+
 }
